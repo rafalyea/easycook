@@ -1,0 +1,536 @@
+:root {
+  /* colour */
+  --grad-1: #2a1a14;
+  --grad-2: #c75f52;
+  --grad-3: #d88159;
+  --lavender: #dd513e;
+  --lavender-light: #de4a36;
+  --glow: #f4a08c;
+  --ink: #2b140d;
+  --ink-soft: #6b4a3a;
+  --light: #fff8f0;
+  --glass: rgba(255, 248, 240, 0.82);
+  --glass-dark: rgba(42, 26, 20, 0.55);
+  --line: rgba(200, 50, 30, 0.25);
+  --focus: #7a1c0e;
+  --btn-text: #ffffff;
+  --overlay: rgba(42, 26, 20, 0.55);
+  --tint: rgba(200, 50, 30, 0.12);
+  --nav-active: rgba(255, 255, 255, 0.25);
+  --shadow-rgb: 42, 26, 20;
+
+  /* type */
+  --font-main: 'Poppins', Arial, sans-serif;
+  --font-script: 'Corinthia', cursive;
+
+  /* spacing scale */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+
+  /* radius scale */
+  --r-sm: 14px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --r-pill: 999px;
+}
+
+html { scroll-behavior: smooth; }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+  background: linear-gradient(334deg, var(--grad-1), var(--grad-2), var(--grad-3));
+  background-size: 180% 180%;
+  background-attachment: fixed;
+  animation: gradient-animation 6s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+h1, h2, h3 { line-height: 1.25; margin: 0; }
+h2 { font-size: 1.5rem; font-weight: 700; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p  { margin: 0; }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ---------- Page container ---------- */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--s5) var(--s6);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: sticky;
+  top: var(--s3);
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+  max-width: 1100px;
+  margin: var(--s4) auto var(--s5);
+  width: calc(100% - 2 * var(--s5));
+  padding: var(--s2) var(--s4) var(--s2) var(--s5);
+  background: var(--glass-dark);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--r-pill);
+}
+
+.navbar .brand {
+  margin-right: auto;
+  font-family: var(--font-script);
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--light);
+}
+
+.navbar a {
+  padding: var(--s2) var(--s4);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--light);
+  text-decoration: none;
+  border-radius: var(--r-pill);
+  transition: background 0.2s;
+}
+
+.navbar a.active,
+.navbar a:hover {
+  background: var(--nav-active);
+}
+
+.navbar a:focus-visible,
+.banner :focus-visible { outline-color: #fff; }
+
+/* ---------- Banner (photo with overlay) ---------- */
+.banner {
+  margin-bottom: var(--s5);
+  padding: var(--s7) var(--s5);
+  text-align: center;
+  color: #fff;
+  border-radius: var(--r-lg);
+  background:
+    linear-gradient(var(--overlay), var(--overlay)),
+    url("../images/banner.jpg") center / cover;
+  box-shadow: 0 8px 30px rgba(var(--shadow-rgb), 0.35);
+}
+
+.banner h1 {
+  font-family: var(--font-script);
+  font-size: clamp(4rem, 12vw, 6.5rem);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: var(--s2);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.banner p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- Moving teaser strip ---------- */
+.teaser {
+  overflow: hidden;
+  margin-bottom: var(--s5);
+  border-radius: var(--r-md);
+}
+
+.teaser-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 30s linear infinite;
+}
+
+.teaser-track img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  margin-right: var(--s3);
+}
+
+.teaser:hover .teaser-track { animation-play-state: paused; }
+
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ---------- Glass panels ---------- */
+.panel,
+#meal-details,
+#edit-form,
+.meal-card,
+.plan-row,
+.empty-state {
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--r-md);
+  box-shadow: 0 4px 18px rgba(var(--shadow-rgb), 0.2);
+}
+
+.panel,
+#meal-details,
+#edit-form { padding: var(--s5); }
+
+.panel > h2,
+#edit-form > h3 { margin-bottom: var(--s4); }
+
+/* ---------- Form controls ---------- */
+label {
+  display: block;
+  margin-bottom: var(--s1);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+input,
+select,
+button {
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  min-height: 44px;
+  border-radius: var(--r-pill);
+}
+
+input,
+select {
+  width: 100%;
+  padding: var(--s2) var(--s4);
+  font-weight: 500;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--line);
+}
+
+input::placeholder { color: #7d6a5f; }
+
+input:hover,
+select:hover { border-color: var(--lavender); }
+
+button {
+  padding: var(--s2) var(--s5);
+  font-weight: 700;
+  color: var(--btn-text);
+  background: var(--lavender);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: box-shadow 0.25s, background 0.25s;
+}
+
+button:hover {
+  background: var(--lavender-light);
+  box-shadow: 0 0 20px 5px var(--glow);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--s4);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  margin-top: var(--s5);
+}
+
+/* ---------- Status messages (sit on the gradient) ---------- */
+#status,
+#plan-count,
+#action-message {
+  width: fit-content;
+  max-width: 100%;
+  margin: var(--s5) auto 0;
+  padding: var(--s2) var(--s5);
+  font-weight: 500;
+  text-align: center;
+  color: var(--light);
+  background: var(--glass-dark);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: var(--r-pill);
+}
+
+#status:empty,
+#plan-count:empty,
+#action-message:empty { display: none; }
+
+/* ---------- Suggestion result ---------- */
+#suggestion:empty { display: none; }
+
+#suggestion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s4);
+  margin-top: var(--s5);
+  padding: var(--s4) var(--s5);
+  font-weight: 500;
+  background: var(--tint);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+#suggestion p { flex: 1 1 240px; }
+#suggestion strong { font-weight: 600; }
+
+/* ---------- Meal cards (index) ---------- */
+#meal-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: var(--s4);
+  margin-top: var(--s5);
+}
+
+.meal-card {
+  padding: var(--s3);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.25s;
+}
+
+.meal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px 5px var(--glow);
+}
+
+.meal-card img {
+  display: block;
+  width: 100%;
+  border-radius: var(--r-sm);
+}
+
+.meal-card h3 {
+  margin-top: var(--s3);
+  font-size: 0.95rem;
+}
+
+/* ---------- Recipe details (index) ---------- */
+#meal-details:empty { display: none; }
+
+#meal-details {
+  margin-top: var(--s6);
+  scroll-margin-top: 96px;
+}
+
+#meal-details h2 {
+  font-size: 1.75rem;
+  margin-bottom: var(--s2);
+}
+
+#meal-details h3 {
+  margin: var(--s6) 0 var(--s3);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
+}
+
+#meal-details strong { font-weight: 600; }
+
+#meal-details > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: var(--s4) 0 0;
+  border-radius: var(--r-md);
+}
+
+#meal-details ul {
+  columns: 2 240px;
+  margin: 0;
+  padding-left: var(--s5);
+}
+
+#meal-details li { margin-bottom: var(--s1); }
+
+/* instructions: keep the API's line breaks, keep lines readable */
+#meal-details h3 + p {
+  max-width: 70ch;
+  line-height: 1.75;
+  white-space: pre-line;
+}
+
+#meal-details label {
+  margin-top: var(--s4);
+}
+
+#meal-details input,
+#meal-details select {
+  max-width: 360px;
+  display: block;
+}
+
+#meal-details button {
+  display: block;
+  margin-top: var(--s4);
+}
+
+#calc-result,
+#plan-message {
+  margin-top: var(--s4);
+  font-weight: 500;
+}
+
+#calc-result:empty,
+#plan-message:empty { display: none; }
+
+#calc-result {
+  padding: var(--s3) var(--s4);
+  background: var(--tint);
+  border-radius: var(--r-sm);
+  max-width: 360px;
+}
+
+/* ---------- Meal plan page ---------- */
+#edit-form { margin-top: var(--s5); }
+
+#edit-title {
+  margin: calc(-1 * var(--s2)) 0 var(--s4);
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+#plan-list { margin-top: var(--s5); }
+
+.plan-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s4) var(--s5);
+  margin-bottom: var(--s3);
+}
+
+.plan-row > div {
+  flex: 1 1 220px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.plan-row strong {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Delete is the quieter, outlined button next to Edit */
+.plan-row button:last-child {
+  color: var(--ink);
+  background: transparent;
+  border-color: var(--ink);
+}
+
+.plan-row button:last-child:hover {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: none;
+}
+
+.empty-state {
+  padding: var(--s6);
+  text-align: center;
+}
+
+.empty-state img {
+  width: 180px;
+  max-width: 100%;
+}
+
+/* ---------- Back to recipes (index) ----------
+   Hidden until a recipe is open in #meal-details. */
+.back-top {
+  display: none;
+  position: fixed;
+  right: var(--s5);
+  bottom: var(--s5);
+  z-index: 10;
+  align-items: center;
+  gap: var(--s2);
+  min-height: 44px;
+  padding: var(--s2) var(--s5);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--btn-text);
+  text-decoration: none;
+  background: var(--lavender);
+  border: 2px solid #fff;
+  border-radius: var(--r-pill);
+  box-shadow: 0 4px 18px rgba(var(--shadow-rgb), 0.35);
+  transition: box-shadow 0.25s, background 0.25s;
+}
+
+.back-top:hover {
+  background: var(--lavender-light);
+  box-shadow: 0 0 20px 5px var(--glow);
+}
+
+body:has(#meal-details:not(:empty)) .back-top { display: inline-flex; }
+
+#finder { scroll-margin-top: 96px; }
+
+/* ---------- Footer ---------- */
+footer {
+  padding: var(--s5) var(--s4) var(--s6);
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--light);
+  text-shadow: 0 1px 6px rgba(var(--shadow-rgb), 0.6);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 600px) {
+  .page { padding: 0 var(--s4) var(--s5); }
+  .navbar {
+    width: calc(100% - 2 * var(--s4));
+    border-radius: var(--r-lg);
+    padding: var(--s2) var(--s3);
+  }
+  .navbar .brand { width: 100%; text-align: center; margin-right: 0; }
+  .navbar a { flex: 1; text-align: center; }
+  .banner { padding: var(--s6) var(--s4); }
+  .back-top { right: var(--s4); bottom: var(--s4); }
+  .panel, #meal-details, #edit-form { padding: var(--s4); }
+  #meal-details input, #meal-details select, #calc-result { max-width: 100%; }
+}
+
+/* ---------- Respect users who turn animations off ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body { animation: none; }
+  .teaser-track { animation: none; }
+  .meal-card, button { transition: none; }
+  .meal-card:hover { transform: none; }
+}

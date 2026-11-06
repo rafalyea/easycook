@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EasyCook - My Meal Plan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <span class="brand">EasyCook</span>
+    <a href="index.html">Recipe Explorer</a>
+    <a href="mealplan.html" class="active" aria-current="page">My Meal Plan</a>
+  </nav>
+
+  <main class="page">
+    <header class="banner">
+      <h1>My Meal Plan</h1>
+      <p>Your saved meals for the week.</p>
+    </header>
+
+    <p id="plan-count" aria-live="polite"></p>
+    <p id="action-message" aria-live="polite"></p>
+
+    <!-- Update form: hidden until the user clicks Edit -->
+    <div id="edit-form" hidden>
+      <h3>Edit meal plan</h3>
+      <p id="edit-title"></p>
+
+      <div class="form-grid">
+        <div>
+          <label for="edit-day">Day</label>
+          <select id="edit-day">
+            <option value="">-- Select day --</option>
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="edit-type">Meal type</label>
+          <select id="edit-type">
+            <option value="">-- Select meal type --</option>
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="edit-note">Note (optional)</label>
+          <input type="text" id="edit-note" maxlength="50">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="save-edit-btn">Save changes</button>
+        <button id="cancel-edit-btn">Cancel</button>
+      </div>
+    </div>
+
+    <div id="plan-list"></div>
+  </main>
+
+  <footer>Recipe data from TheMealDB</footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/mealplan.js"></script>
+</body>
+</html>
